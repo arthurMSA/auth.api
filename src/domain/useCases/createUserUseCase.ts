@@ -1,13 +1,19 @@
 import { CreateUserDTO } from '../dto/user/createUserDto'
 import User from '../entities/user'
-import IUserRepository from '../interfaces/repositories/IUserRepository'
+import IHashPassword from '../interfaces/user/IHashPassword'
+import IUserRepository from '../interfaces/user/IUserRepository'
 
 export default class CreateUserUseCase {
     constructor(
-        private readonly userRepository: IUserRepository
+        private readonly userRepository: IUserRepository,
+        private readonly hashPassword: IHashPassword,
     ) {}
     
     async execute(createUserDTO: CreateUserDTO): Promise<User> {
-        return this.userRepository.createUser(createUserDTO)
+        const hashedPassword = await this.hashPassword.hash(createUserDTO.password)
+        return this.userRepository.createUser({
+            ...createUserDTO,
+            password: hashedPassword,
+        })
     }
 }
