@@ -1,6 +1,6 @@
-import UserServices from '../../../app/service/userServices'
+import UserServices from '../../../app/services/userServices'
 import { CreateUserDTO } from '../../../domain/dto/user/createUserDto'
-import UserRepository from '../../mongodb/repositories/userRepository'
+import UserRepository from '../../database/mongodb/repositories/userRepository'
 import IUserController from '../interfaces/IUserController'
 
 export default class UserController implements IUserController {
