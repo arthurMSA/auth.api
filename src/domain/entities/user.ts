@@ -1,15 +1,10 @@
-class User {
+export default class User {
     private _name: string
     private _email: string
     private _password: string
     private _token: string
     
-    construct(name: string, email: string, password: string, token: string) {
-        this._name = name
-        this._email = email
-        this._password = password
-        this._token = token
-    }
+    constructor(_name: string, _email: string, _password: string, _token: string) {}
     
     public get name(): string {
         return this._name

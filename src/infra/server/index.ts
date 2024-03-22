@@ -7,7 +7,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 
-app.use(route)
+route(app)
 
 app.listen(3000, () => {
     console.log('SERVER RUNNING')
