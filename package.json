@@ -1,5 +1,10 @@
 {
+  "name": "authapi",
+  "version": "1.0.0",
+  "main": "index.js",
   "scripts": {
+    "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/infra/server/index.ts",
+    "build": "tsc",
     "lint": "eslint . --ext .ts"
   },
   "devDependencies": {
@@ -7,5 +12,11 @@
     "@typescript-eslint/parser": "^7.3.1",
     "eslint": "^8.57.0",
     "typescript": "^5.4.3"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "cors": "^2.8.5",
+    "express": "^4.19.1",
+    "ts-node-dev": "^2.0.0"
   }
 }
