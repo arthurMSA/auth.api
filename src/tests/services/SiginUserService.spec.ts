@@ -12,14 +12,16 @@ const mockUserRepository = {
     findUserByEmail: jest.fn()
 }
 
-describe('Create User Use Case', () => {
-    let user: User
+describe('Sign In User Service', () => {
+    let user: User;
+    let passwordHasher: PasswordHasher
     beforeEach(async () => {
+        passwordHasher = new PasswordHasher()
         user = new User({
             id: 'idtest',
             name: 'test',
             email: 'test@gmail.com',
-            password: await new PasswordHasher().hash('password'),
+            password: await passwordHasher.hash('password'),
             token: 'tokentest',
         })
     })
@@ -31,7 +33,7 @@ describe('Create User Use Case', () => {
         }
         mockUserRepository.findUserByEmail.mockResolvedValue(user)
         
-        const signInUserUseCase = new UserServices(mockUserRepository as IUserRepository, new PasswordHasher(), new TokenGenerator())
+        const signInUserUseCase = new UserServices(mockUserRepository as IUserRepository, passwordHasher, new TokenGenerator())
         const result = await signInUserUseCase.signIn(signInUserDTO)
         expect(result).toEqual(user)
 
@@ -45,7 +47,7 @@ describe('Create User Use Case', () => {
 
         mockUserRepository.findUserByEmail.mockResolvedValue(user)
         
-        const signInUserUseCase = new UserServices(mockUserRepository as IUserRepository, new PasswordHasher(), new TokenGenerator())
+        const signInUserUseCase = new UserServices(mockUserRepository as IUserRepository, passwordHasher, new TokenGenerator())
         try {
             await signInUserUseCase.signIn(signInUserDTO)
         } catch (error) {
@@ -53,7 +55,7 @@ describe('Create User Use Case', () => {
         }
     })
 
-    it('should not login with invalid credentials', async () => {
+    it('should not login with non-existent credentials', async () => {
         const signInUserDTO: SignInUserDTO = {
             email: 'test@gmail.com',
             password: 'wrongpassword',
@@ -61,7 +63,7 @@ describe('Create User Use Case', () => {
 
         mockUserRepository.findUserByEmail.mockResolvedValue(null)
         
-        const signInUserUseCase = new UserServices(mockUserRepository as IUserRepository, new PasswordHasher(), new TokenGenerator())
+        const signInUserUseCase = new UserServices(mockUserRepository as IUserRepository, passwordHasher, new TokenGenerator())
         try {
             await signInUserUseCase.signIn(signInUserDTO)
         } catch (error) {

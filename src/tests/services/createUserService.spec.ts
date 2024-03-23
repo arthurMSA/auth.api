@@ -11,7 +11,7 @@ const mockUserRepository = {
     findUserByEmail: jest.fn()
 }
 
-describe('Create User Use Case', () => {
+describe('Create User Service', () => {
     const createUserDTO: CreateUserDTO = {
         email: 'test@gmail.com',
         name: 'test',
