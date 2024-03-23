@@ -12,7 +12,8 @@ export default class SignInUserUseCase {
     ) {}
     
     async execute(loginUserDTO: SignInUserDTO): Promise<User> {
-        const user = await this.userRepository.findUserByEmail(loginUserDTO.email)
+        const user = await this.userRepository.findUserByEmail(loginUserDTO.email.toLowerCase())
+
         if (user === null) throw new UserNotFoundError()
         if (!(await this.hashPassword.compare(loginUserDTO.password, user.password as string)))
             throw new InvalidCredentialsError()
