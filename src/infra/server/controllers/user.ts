@@ -10,6 +10,7 @@ import { SignInUserDTO } from '../../../domain/dto/user/signInUserDTO'
 import User from '../../../domain/entities/user'
 import UserNotFoundError from '../../../domain/errors/user/userNotFoundError'
 import InvalidCredentialsError from '../../../domain/errors/user/invalidCredentialsError'
+import InvalidEmailError from '../../../domain/errors/user/invalidEmailError'
 
 export default class UserController implements IUserController {
     userRepository: UserRepository
@@ -34,10 +35,15 @@ export default class UserController implements IUserController {
             const newUser: User = await this.userService.create(createUserDTO)
             res.status(200).send({ data: newUser })
         } catch (error) {
-            if (error instanceof EmailAlreadyExistError)
-            res.status(409).send({
-                error,
-            })
+            if (error instanceof EmailAlreadyExistError) {
+                res.status(409).send({
+                    error,
+                })
+                return
+            }
+            if (error instanceof InvalidEmailError) {
+                res.status(400).send({ error })
+            }
         }
     }
 
