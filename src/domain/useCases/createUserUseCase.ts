@@ -1,7 +1,7 @@
 import { CreateUserDTO } from '../dto/user/createUserDto'
 import User from '../entities/user'
-import IHashPassword from '../interfaces/user/IHashPassword'
-import IUserRepository from '../interfaces/user/IUserRepository'
+import IHashPassword from '../interfaces/user/hashPassword'
+import IUserRepository from '../interfaces/user/userRepository'
 
 export default class CreateUserUseCase {
     constructor(

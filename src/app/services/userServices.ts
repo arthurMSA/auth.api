@@ -1,6 +1,6 @@
 import { CreateUserDTO } from '../../domain/dto/user/createUserDto'
 import User from '../../domain/entities/user'
-import IUserRepository from '../../domain/interfaces/user/IUserRepository'
+import IUserRepository from '../../domain/interfaces/user/userRepository'
 import CreateUserUseCase from '../../domain/useCases/createUserUseCase'
 import PassowrdHasher from '../providers/passwordHasher'
 

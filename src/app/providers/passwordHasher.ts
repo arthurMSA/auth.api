@@ -1,4 +1,4 @@
-import IHashPassword from '../../domain/interfaces/user/IHashPassword'
+import IHashPassword from '../../domain/interfaces/user/hashPassword'
 import bcrypt from 'bcryptjs'
 
 export default class PassowrdHasher implements IHashPassword {
