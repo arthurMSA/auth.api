@@ -14,6 +14,6 @@ export default class PasswordHasher implements IHashPassword {
     }
 
     compare(password: string, hashedPassword: string): Promise<boolean> {
-        throw new Error("Method not implemented.");
+        return bcrypt.compare(password, hashedPassword)
     }
 }

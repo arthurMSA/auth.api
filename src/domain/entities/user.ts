@@ -4,7 +4,7 @@ export default class User implements IUser {
     id: string
     name: string
     email: string
-    password: string
+    password?: string
     token: string
 
     constructor(user: IUser) {
