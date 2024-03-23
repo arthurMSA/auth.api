@@ -1,4 +1,4 @@
-import { CreateUserDTO } from '../../domain/dto/user/createUserDto'
+import { CreateUserDTO } from '../../domain/dto/user/createUserDTO'
 import { SignInUserDTO } from '../../domain/dto/user/signInUserDTO'
 import User from '../../domain/entities/user'
 import IHashPassword from '../../domain/interfaces/user/hashPassword'

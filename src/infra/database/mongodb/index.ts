@@ -9,6 +9,6 @@ export default class MongoDB implements IDBConnection {
           .catch(() => {
             console.log('Connection error')
             //reconnect
-            })
+          })
     }   
 }

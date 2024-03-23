@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "ts-node-dev --inspect --transpile-only --ignore-watch node_modules src/infra/server/index.ts",
     "build": "tsc",
+    "start": "node dist/src/infra/server/index",
     "lint": "eslint . --ext .ts",
     "test": "jest"
   },

@@ -1,4 +1,4 @@
-import { CreateUserDTO } from '../../../../domain/dto/user/createUserDto'
+import { CreateUserDTO } from '../../../../domain/dto/user/createUserDTO'
 import User from '../../../../domain/entities/user'
 import IUser from '../../../../domain/interfaces/user/user'
 import IUserRepository from '../../../../domain/interfaces/user/userRepository'

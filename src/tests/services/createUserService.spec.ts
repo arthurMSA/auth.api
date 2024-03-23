@@ -1,7 +1,7 @@
 import PasswordHasher from '../../app/providers/passwordHasher'
 import TokenGenerator from '../../app/providers/tokenGenerator'
 import UserServices from '../../app/services/userServices'
-import { CreateUserDTO } from '../../domain/dto/user/createUserDto'
+import { CreateUserDTO } from '../../domain/dto/user/createUserDTO'
 import User from '../../domain/entities/user'
 import EmailAlreadyExistError from '../../domain/errors/user/emailAlreadyExistError'
 import IUserRepository from '../../domain/interfaces/user/userRepository'

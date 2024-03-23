@@ -1,4 +1,4 @@
-import { CreateUserDTO } from '../../dto/user/createUserDto'
+import { CreateUserDTO } from '../../dto/user/createUserDTO'
 import User from '../../entities/user'
 
 export default interface IUserRepository {

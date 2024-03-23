@@ -1,4 +1,4 @@
-import { CreateUserDTO } from '../dto/user/createUserDto'
+import { CreateUserDTO } from '../dto/user/createUserDTO'
 import User from '../entities/user'
 import EmailAlreadyExistError from '../errors/user/emailAlreadyExistError'
 import IHashPassword from '../interfaces/user/hashPassword'
