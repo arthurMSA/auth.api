@@ -10,6 +10,12 @@ export default class CreateUserUseCase {
     ) {}
     
     async execute(createUserDTO: CreateUserDTO): Promise<User> {
+        const emailAlreadyRegistred = await this.userRepository.findUserByEmail(createUserDTO.email) !== null
+
+        if (emailAlreadyRegistred) {
+            throw 'EMAIL JA CADASTRADO'
+        }
+
         const hashedPassword = await this.hashPassword.hash(createUserDTO.password)
         return this.userRepository.createUser({
             ...createUserDTO,
