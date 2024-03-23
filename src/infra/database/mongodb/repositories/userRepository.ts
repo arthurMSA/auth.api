@@ -15,9 +15,9 @@ export default class UserRepository implements IUserRepository {
         
     }
 
-    async createUser(createUserDTO: CreateUserDTO): Promise<User> {
+    async createUser(createUserDTO: CreateUserDTO, token: string): Promise<User> {
         try {
-            const newUser: IUserModel = await UserModel.create(createUserDTO)
+            const newUser: IUserModel = await UserModel.create({ ...createUserDTO, token })
             return Promise.resolve(newUser)
         } catch (error) {
             return Promise.reject(error)
