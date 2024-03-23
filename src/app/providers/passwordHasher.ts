@@ -1,5 +1,5 @@
 import IHashPassword from '../../domain/interfaces/user/hashPassword'
-import bcrypt from 'bcryptjs'
+import bcrypt from 'bcrypt'
 
 export default class PasswordHasher implements IHashPassword {
     private readonly salt: number
