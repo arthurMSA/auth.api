@@ -1,5 +1,6 @@
 import { CreateUserDTO } from '../dto/user/createUserDto'
 import User from '../entities/user'
+import EmailAlreadyExistError from '../errors/user/emailAlreadyExistError'
 import IHashPassword from '../interfaces/user/hashPassword'
 import ITokenGenerator from '../interfaces/user/tokenGenerator'
 import IUserRepository from '../interfaces/user/userRepository'
@@ -12,16 +13,20 @@ export default class CreateUserUseCase {
     ) {}
     
     async execute(createUserDTO: CreateUserDTO): Promise<User> {
-        const emailAlreadyRegistred = await this.userRepository.findUserByEmail(createUserDTO.email) !== null
+        const userData = createUserDTO
 
+        userData.email = userData.email.toLowerCase()
+
+        const emailAlreadyRegistred = await this.userRepository.findUserByEmail(userData.email) !== null
         if (emailAlreadyRegistred) {
-            throw 'EMAIL JA CADASTRADO'
+            throw new EmailAlreadyExistError()
         }
 
-        const hashedPassword = await this.hashPassword.hash(createUserDTO.password)
-        const token = this.tokenGenerator.generate(createUserDTO.email)
+        const hashedPassword = await this.hashPassword.hash(userData.password)
+        const token = this.tokenGenerator.generate(userData.email)
+
         return this.userRepository.createUser({
-            ...createUserDTO,
+            ...userData,
             password: hashedPassword,
         }, token)
     }

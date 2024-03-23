@@ -8,7 +8,7 @@ export default class User implements IUser {
     token: string
 
     constructor(user: IUser) {
-        id: string
+        this.id = user.id
         this.name = user.name
         this.email = user.email
         this.password = user.password

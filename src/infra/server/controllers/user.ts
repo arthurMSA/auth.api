@@ -1,9 +1,11 @@
+import { Request, Response } from 'express'
 import PasswordHasher from '../../../app/providers/passwordHasher'
 import TokenGenerator from '../../../app/providers/tokenGenerator'
 import UserServices from '../../../app/services/userServices'
-import { CreateUserDTO } from '../../../domain/dto/user/createUserDto'
 import UserRepository from '../../database/mongodb/repositories/userRepository'
-import IUserController from '../interfaces/user/IUserController'
+import IUserController from '../interfaces/user/userController'
+import { CreateUserDTO } from '../../../domain/dto/user/createUserDto'
+import EmailAlreadyExistError from '../../../domain/errors/user/emailAlreadyExistError'
 
 export default class UserController implements IUserController {
     userRepository: UserRepository
@@ -22,16 +24,17 @@ export default class UserController implements IUserController {
         )
     }
 
-    async createUser(createUserDTO: CreateUserDTO): Promise<any> {
-        // eslint-disable-next-line no-useless-catch
+    async createUser(req: Request, res: Response): Promise<any> {
         try {
+            const createUserDTO: CreateUserDTO = req.body
             const newUser = await this.userService.createUser(createUserDTO)
-            return {
-                data: newUser,
-                status: 200,
-            }
+            return res.status(200).send({ data: newUser })
         } catch (error) {
-            throw error
+            console.log('>>>>', error)
+            if (error instanceof EmailAlreadyExistError)
+            return res.status(409).send({
+                error,
+            })
         }
     }
 }
