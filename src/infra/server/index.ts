@@ -4,7 +4,6 @@ import route from './routes'
 import cors from 'cors'
 import MongoDB from '../database/mongodb'
 
-
 const app = express()
 
 app.use(express.json())
