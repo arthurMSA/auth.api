@@ -1,5 +1,6 @@
 import { CreateUserDTO } from '../../../../domain/dto/user/createUserDto'
 import User from '../../../../domain/entities/user'
+import IUser from '../../../../domain/interfaces/user/user'
 import IUserRepository from '../../../../domain/interfaces/user/userRepository'
 import { IUserModel, UserModel } from '../models/user'
 
@@ -17,7 +18,7 @@ export default class UserRepository implements IUserRepository {
 
     async createUser(createUserDTO: CreateUserDTO, token: string): Promise<User> {
         try {
-            const newUser: IUserModel = await UserModel.create({ ...createUserDTO, token })
+            const newUser: IUser = await UserModel.create({ ...createUserDTO, token })
             return Promise.resolve(newUser)
         } catch (error) {
             return Promise.reject(error)
